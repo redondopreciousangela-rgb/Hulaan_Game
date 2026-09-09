@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hulaan Mo! — Barangay Fiesta Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fbf2dc;
+    --paper:#fffaf0;
+    --wood:#5b3a22;
+    --wood-dark:#3d2413;
+    --blue:#0a3a99;
+    --blue-deep:#062a72;
+    --red:#d4172c;
+    --gold:#f6b93b;
+    --gold-deep:#e09b1a;
+    --leaf:#2f6b4f;
+    --ink:#2a1c10;
+    --shadow-soft: 0 10px 24px rgba(61,36,19,0.18);
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    font-family:'Nunito', sans-serif;
+    background:
+      radial-gradient(ellipse at top, #fff6de 0%, var(--cream) 55%, #f3e2bb 100%);
+    color:var(--ink);
+    line-height:1.6;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+  }
+
+  a{ color:inherit; }
+
+  .wrap{ max-width:960px; margin:0 auto; padding:0 24px; }
+
+  /* ---------- BANDERITAS (fiesta bunting) ---------- */
+  .bunting{
+    position:relative;
+    height:64px;
+    overflow:hidden;
+    background:linear-gradient(#3d2413, #3d2413) no-repeat;
+    background-size:100% 3px;
+    background-position:top;
+  }
+  .bunting-row{
+    display:flex;
+    gap:2px;
+    width:max-content;
+    animation:sway 5s ease-in-out infinite;
+    transform-origin:top center;
+    padding-top:3px;
+  }
+  @keyframes sway{
+    0%,100%{ transform:rotate(-0.6deg) translateY(0); }
+    50%{ transform:rotate(0.6deg) translateY(3px); }
+  }
+  .flag{
+    width:34px; height:44px;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+  }
+  .flag:nth-child(6n+1){ background:var(--red); }
+  .flag:nth-child(6n+2){ background:var(--gold); }
+  .flag:nth-child(6n+3){ background:var(--blue); }
+  .flag:nth-child(6n+4){ background:var(--leaf); }
+  .flag:nth-child(6n+5){ background:var(--gold); }
+  .flag:nth-child(6n+6){ background:var(--red); }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:56px 24px 40px;
+    text-align:center;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      repeating-conic-gradient(from 0deg, rgba(212,23,44,0.05) 0deg 6deg, transparent 6deg 12deg);
+    mask-image: radial-gradient(circle at 50% 15%, black, transparent 65%);
+    pointer-events:none;
+  }
+  .kicker{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:600;
+    font-size:0.95rem;
+    color:var(--leaf);
+    background:#eef7ee;
+    border:1.5px dashed var(--leaf);
+    padding:6px 16px;
+    border-radius:999px;
+  }
+  h1.title{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:800;
+    font-size:clamp(2.6rem, 7vw, 4.4rem);
+    color:var(--blue);
+    margin:18px 0 6px;
+    letter-spacing:-0.01em;
+    text-shadow: 3px 3px 0 var(--gold);
+  }
+  .hero .tagline{
+    font-size:1.2rem;
+    color:var(--wood);
+    max-width:520px;
+    margin:0 auto;
+    font-style:italic;
+  }
+
+  /* number dial illustration */
+  .dial-wrap{ display:flex; justify-content:center; margin:36px 0 30px; }
+  .dial{
+    width:200px; height:200px;
+    border-radius:50%;
+    background: conic-gradient(var(--red) 0 8%, var(--gold) 8% 16%, var(--blue) 16% 24%, var(--leaf) 24% 32%, var(--red) 32% 40%, var(--gold) 40% 48%, var(--blue) 48% 56%, var(--leaf) 56% 64%, var(--red) 64% 72%, var(--gold) 72% 80%, var(--blue) 80% 88%, var(--leaf) 88% 100%);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow: var(--shadow-soft), 0 0 0 6px var(--paper), 0 0 0 9px var(--wood);
+    position:relative;
+  }
+  .dial::after{
+    content:"?";
+    font-family:'Baloo 2', sans-serif;
+    font-weight:800;
+    font-size:3rem;
+    color:var(--paper);
+    background:var(--wood-dark);
+    width:96px; height:96px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow: inset 0 0 0 3px rgba(255,255,255,0.15);
+  }
+
+  .cta-row{
+    display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:8px;
+  }
+  .ticket-btn{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size:1.05rem;
+    color:var(--paper);
+    background:var(--red);
+    padding:14px 32px;
+    border-radius:8px;
+    text-decoration:none;
+    position:relative;
+    box-shadow: var(--shadow-soft);
+    border:2px dashed rgba(255,255,255,0.55);
+  }
+  .ticket-btn:hover{ background:#b9101f; }
+
+  /* ---------- SECTIONS ---------- */
+  section{ padding:20px 0; }
+
+  .section-head{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size:1.7rem;
+    color:var(--wood-dark);
+    margin-bottom:14px;
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+  }
+  .section-head .sub{
+    font-family:'Nunito', sans-serif;
+    font-weight:600;
+    font-style:italic;
+    font-size:1rem;
+    color:var(--leaf);
+  }
+
+  .panel{
+    background:var(--paper);
+    border-radius:18px;
+    padding:28px 30px;
+    box-shadow: var(--shadow-soft);
+    border:1px solid rgba(91,58,34,0.08);
+  }
+  .panel + .panel{ margin-top:22px; }
+  .panel p{ max-width:70ch; }
+
+  .elements-list{
+    list-style:none;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(190px,1fr));
+    gap:10px;
+    margin-top:16px;
+  }
+  .elements-list li{
+    background:#fff6de;
+    border-left:4px solid var(--gold-deep);
+    padding:10px 14px;
+    border-radius:6px;
+    font-weight:600;
+  }
+
+  /* ---------- PRIZES: hanging tags ---------- */
+  .tags-line{
+    position:relative;
+    padding-top:26px;
+  }
+  .tags-line::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0; height:2px;
+    background:repeating-linear-gradient(90deg, var(--wood) 0 6px, transparent 6px 10px);
+  }
+  .prizes{
+    display:flex; flex-wrap:wrap; gap:22px 18px; justify-content:center;
+    padding-top:10px;
+  }
+  .prize-tag{
+    background:var(--gold);
+    color:var(--wood-dark);
+    font-weight:700;
+    font-family:'Baloo 2', sans-serif;
+    padding:10px 16px 10px 14px;
+    border-radius:0 8px 8px 0;
+    position:relative;
+    box-shadow: 2px 3px 6px rgba(61,36,19,0.25);
+  }
+  .prize-tag::before{
+    content:"";
+    position:absolute; top:-16px; left:14px;
+    width:2px; height:16px;
+    background:var(--wood);
+  }
+  .prize-tag::after{
+    content:"";
+    position:absolute; left:6px; top:50%; transform:translateY(-50%);
+    width:6px; height:6px; border-radius:50%; background:var(--paper);
+  }
+
+  /* ---------- SCREENSHOTS: clothesline ---------- */
+  .clothesline{ position:relative; margin-top:30px; padding-top:8px; }
+  .clothesline::before{
+    content:"";
+    position:absolute; top:0; left:-4px; right:-4px; height:3px;
+    background:var(--wood);
+    border-radius:3px;
+  }
+  .photos{
+    display:flex; gap:26px; flex-wrap:wrap; justify-content:center; padding-top:22px;
+  }
+  .photo{
+    background:#fff;
+    padding:10px 10px 34px;
+    box-shadow: var(--shadow-soft);
+    width:230px;
+    position:relative;
+    transform:rotate(var(--tilt, -2deg));
+  }
+  .photo:nth-child(2){ --tilt:1.5deg; }
+  .photo:nth-child(3){ --tilt:-1deg; }
+  .photo::before{
+    content:"";
+    position:absolute; top:-12px; left:50%; transform:translateX(-50%);
+    width:22px; height:14px;
+    background:var(--blue);
+    border-radius:3px;
+  }
+  .photo img{ width:100%; display:block; }
+  .photo .caption{
+    position:absolute; bottom:10px; left:0; right:0;
+    text-align:center;
+    font-family:'Baloo 2', sans-serif;
+    font-size:0.9rem;
+    color:var(--wood);
+  }
+
+  /* ---------- DOWNLOAD / how to run ---------- */
+  .stub{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow: var(--shadow-soft);
+  }
+  .stub-main{
+    flex:1 1 320px;
+    background:var(--blue);
+    color:var(--paper);
+    padding:28px 30px;
+  }
+  .stub-main h3{
+    font-family:'Baloo 2', sans-serif;
+    font-size:1.3rem;
+    margin-bottom:10px;
+  }
+  .stub-side{
+    flex:0 0 220px;
+    background:var(--blue-deep);
+    display:flex; align-items:center; justify-content:center;
+    padding:24px;
+    border-left:3px dashed rgba(255,255,255,0.35);
+  }
+  code.steps{
+    display:block;
+    background:rgba(0,0,0,0.18);
+    color:#ffe9b0;
+    padding:14px 16px;
+    border-radius:8px;
+    font-size:0.9rem;
+    line-height:1.9;
+    margin-top:14px;
+  }
+  .requires{
+    margin-top:12px;
+    font-size:0.9rem;
+    color:#dbe6ff;
+  }
+  .btn-download{
+    display:inline-block;
+    background:var(--gold);
+    color:var(--wood-dark);
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    padding:12px 22px;
+    border-radius:8px;
+    text-decoration:none;
+    text-align:center;
+  }
+  .btn-download:hover{ background:var(--gold-deep); }
+
+  /* ---------- QR ---------- */
+  .qr-section{
+    text-align:center; margin-top:10px;
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+  }
+  .qr-frame{
+    padding:10px;
+    background:var(--paper);
+    box-shadow: var(--shadow-soft);
+    border:3px solid var(--gold);
+  }
+  .qr-frame img{ display:block; max-width:170px; }
+
+  /* ---------- DEVELOPER: ID card ---------- */
+  .id-card{
+    max-width:420px;
+    margin:0 auto;
+    background:var(--paper);
+    border-radius:14px;
+    box-shadow: var(--shadow-soft);
+    overflow:hidden;
+    border:1px solid rgba(91,58,34,0.1);
+  }
+  .id-card .strip{
+    background:linear-gradient(90deg, var(--red), var(--gold), var(--blue));
+    height:10px;
+  }
+  .id-card .body{ padding:22px 26px; }
+  .id-card .role{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    color:var(--blue);
+    font-size:0.95rem;
+    margin-bottom:12px;
+  }
+  .id-card dl{ display:grid; grid-template-columns:auto 1fr; gap:6px 14px; }
+  .id-card dt{ font-weight:700; color:var(--wood); }
+  .id-card dd{ color:var(--ink); }
+
+  /* ---------- FOOTER (jeepney signage) ---------- */
+  footer{
+    margin-top:50px;
+    background:var(--wood-dark);
+    color:#f3e6d2;
+    text-align:center;
+    padding:30px 20px;
+  }
+  footer .plate{
+    display:inline-block;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size:1.3rem;
+    letter-spacing:0.02em;
+    color:var(--gold);
+  }
+  footer p{ margin-top:8px; font-size:0.85rem; color:#c9b79a; }
+
+  @media (max-width:600px){
+    .dial{ width:160px; height:160px; }
+    .dial::after{ width:76px; height:76px; font-size:2.2rem; }
+    .stub-side{ flex-basis:100%; border-left:none; border-top:3px dashed rgba(255,255,255,0.35); }
+  }
+</style>
+</head>
+<body>
+
+  <div class="bunting" aria-hidden="true">
+    <div class="bunting-row" id="buntingRow"></div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <span class="kicker">🎊 Barangay Fiesta Edition</span>
+      <h1 class="title">Hulaan Mo!</h1>
+      <p class="tagline">Isang tapang, isang hula — guess the number, win the fiesta prize.</p>
+
+      <div class="dial-wrap">
+        <div class="dial" role="img" aria-label="Number wheel from 1 to 100"></div>
+      </div>
+
+      <div class="cta-row">
+        <a href="#download" class="ticket-btn">Get your copy</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <section>
+      <h2 class="section-head">What it is <span class="sub">the setup</span></h2>
+      <div class="panel">
+        <p>Hulaan Mo! drops you in the middle of a barangay fiesta, where a secret number between 1 and 100 stands between you and a plate of your favorite Filipino food. You get ten guesses — each one nudges you closer or further, "mataas" or "mababa," until you land the number and claim your premyo.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-head">Where it comes from <span class="sub">the concept</span></h2>
+      <div class="panel">
+        <p>The game borrows its energy from real barangay fiestas — the kind built on bayanihan, good food, and a crowd cheering someone on at a game booth. Tagalog prompts, food-based prizes, and fiesta color throughout keep that spirit intact rather than treating it as a skin over a generic quiz.</p>
+        <ul class="elements-list">
+          <li>Tagalog prompts and hints</li>
+          <li>Philippine flag palette</li>
+          <li>Food-based premyo</li>
+          <li>Barangay fiesta setting</li>
+          <li>Filipino proverbs as hints</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-head">Premyo <span class="sub">what you can win</span></h2>
+      <div class="tags-line">
+        <div class="prizes">
+          <span class="prize-tag">Manga</span>
+          <span class="prize-tag">Isda</span>
+          <span class="prize-tag">Lumpia</span>
+          <span class="prize-tag">Lechon</span>
+          <span class="prize-tag">Halo-Halo</span>
+          <span class="prize-tag">Pandesal</span>
+          <span class="prize-tag">Saging</span>
+          <span class="prize-tag">Buko</span>
+          <span class="prize-tag">Adobo</span>
+          <span class="prize-tag">Pancit</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-head">A look inside <span class="sub">screenshots</span></h2>
+      <div class="clothesline">
+        <div class="photos">
+          <div class="photo">
+            <img src="screenshot1.png" alt="Main game screen" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22><rect fill=%22%23fff6de%22 width=%22300%22 height=%22200%22/><text x=%2255%22 y=%22104%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22%23785e3f%22>Main screen</text></svg>'">
+            <div class="caption">Main game screen</div>
+          </div>
+          <div class="photo">
+            <img src="screenshot2.png" alt="Win screen with confetti" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22><rect fill=%22%23fff6de%22 width=%22300%22 height=%22200%22/><text x=%2262%22 y=%22104%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22%23785e3f%22>Win screen</text></svg>'">
+            <div class="caption">Win screen, confetti and all</div>
+          </div>
+          <div class="photo">
+            <img src="screenshot3.png" alt="Hint dialog" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22><rect fill=%22%23fff6de%22 width=%22300%22 height=%22200%22/><text x=%2278%22 y=%22104%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22%23785e3f%22>Hint dialog</text></svg>'">
+            <div class="caption">Hint dialog</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="download">
+      <h2 class="section-head">Download <span class="sub">play it yourself</span></h2>
+      <div class="stub">
+        <div class="stub-main">
+          <h3>Get the full package</h3>
+          <p>Everything you need to run the game on your own machine.</p>
+          <code class="steps">
+            1. Extract the ZIP file<br>
+            2. Open a terminal<br>
+            3. Run: python HulaanGame.py
+          </code>
+          <div class="requires">Requires Python 3.x, tkinter, pygame, numpy</div>
+        </div>
+        <div class="stub-side">
+          <a href="" class="btn-download">Download ZIP</a>
+        </div>
+      </div>
+
+      <div class="qr-section">
+        <div class="qr-frame">
+          <img src="qrcode.png" alt="QR code to the game page" onerror="this.parentElement.style.display='none'">
+        </div>
+        <p style="color:var(--wood); font-size:0.9rem;">Scan to open this page on your phone</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-head">Developer <span class="sub">credits</span></h2>
+      <div class="id-card">
+        <div class="strip"></div>
+        <div class="body">
+          <div class="role">Project Developer</div>
+          <dl>
+            <dt>Name</dt><dd>[Your Full Name]</dd>
+            <dt>Course</dt><dd>BSIT</dd>
+            <dt>Section</dt><dd>[Your Section]</dd>
+            <dt>School</dt><dd>[Your School Name]</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="plate">HULAAN MO! · BARANGAY FIESTA EDITION</div>
+    <p>© 2026 — a Filipino-themed Python game project</p>
+  </footer>
+
+  <script>
+    // Build the bunting flags (duplicated to fill the width, no external assets)
+    const row = document.getElementById('buntingRow');
+    const count = Math.ceil(window.innerWidth / 36) + 4;
+    for (let i = 0; i < count; i++){
+      const f = document.createElement('div');
+      f.className = 'flag';
+      row.appendChild(f);
+    }
+  </script>
+
+</body>
+</html>
